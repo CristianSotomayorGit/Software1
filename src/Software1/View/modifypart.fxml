@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Software1.Controller.ModifyPartViewController">
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Part">
+                            <font>
+                                <Font name="System Bold" size="14.0"/>
+                            </font>
+                        </Text>
+                        <RadioButton fx:id="inHousePartRadioButton" mnemonicParsing="false" onAction="#changeLabelName"
+                                     text="In-House">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="Options"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="outsourcedPartRadioButton" mnemonicParsing="false"
+                                     onAction="#changeLabelName" text="Outsourced" toggleGroup="$Options"/>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID"/>
+                        <TextField fx:id="idTextField" disable="true" editable="false">
+                            <HBox.margin>
+                                <Insets left="100.0"/>
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name"/>
+                        <TextField fx:id="NameTextField">
+                            <HBox.margin>
+                                <Insets left="80.0"/>
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stock"/>
+                        <TextField fx:id="stockTextField">
+                            <HBox.margin>
+                                <Insets left="40.0"/>
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price/Cost"/>
+                        <TextField fx:id="priceTextField">
+                            <HBox.margin>
+                                <Insets left="40.0"/>
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max"/>
+                        <TextField fx:id="maximumTextField">
+                            <HBox.margin>
+                                <Insets left="70.0"/>
+                            </HBox.margin>
+                        </TextField>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Min"/>
+                        <TextField fx:id="minimumTextField"/>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Label fx:id="inHousePartOrOutsourcedPartTextFieldLabel" onDragDetected="#changeLabelName"
+                               text="Machine Id"/>
+                        <TextField fx:id="companyNameOrMachineIdTextField">
+                            <HBox.margin>
+                                <Insets left="30.0"/>
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#save" text="Save"/>
+                        <Button mnemonicParsing="false" onAction="#cancel" text="Cancel"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+    <padding>
+        <Insets bottom="80.0" left="80.0" right="80.0" top="80.0"/>
+    </padding>
+</BorderPane>
