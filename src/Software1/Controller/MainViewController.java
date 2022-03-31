@@ -22,11 +22,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author Cristian Sotomayor
- */
 
 /**
+ * @author Cristian Sotomayor
  * MainViewController Software1.Controller class for mainform.fxml
  */
 
@@ -183,6 +181,12 @@ public class MainViewController implements Initializable {
             alert.setTitle("No Match Found");
             alert.setHeaderText("Cannot find a part name with: " + term);
             alert.showAndWait();
+        } else if (term.isEmpty()){
+            partTableView.setItems(Inventory.getAllParts());
+            partIdTVColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
+            partNameTVColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            partStockTVColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            partPriceTVColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         } else {
             partTableView.setItems(foundPart);
         }
@@ -233,15 +237,23 @@ public class MainViewController implements Initializable {
      */
     @FXML
     public void deleteProduct() {
-        if (productTableView.getSelectionModel().isEmpty()) {
+        TableView.TableViewSelectionModel<Product> selectedProduct = productTableView.getSelectionModel();
+
+
+        if (selectedProduct.isEmpty()) {
             inform("Attention!", "No Product Selected", "Please choose product from the above list");
-            return;
         }
-        if (confirm("Attention!", "You are about to delete this product. Are you sure?")) {
-            int selectedPart = productTableView.getSelectionModel().getSelectedIndex();
-            productTableView.getItems().remove(selectedPart);
+        int id = productTableView.getSelectionModel().getSelectedItem().getId();
+        if (Inventory.lookupProductById(id).getAllAssociatedParts().isEmpty()) {
+            if (confirm("Attention!", "You are about to delete this product. Are you sure?")) {
+                productTableView.getItems().remove(selectedProduct.getSelectedIndex());
+            }
+        }
+        else {
+            inform("Cannot Delete", "Cannot delete product.", "Cannot delete product because of associated parts.");
         }
     }
+
 
     /**
      * Method to trigger product search after user inputs search criteria and presses search button
@@ -258,8 +270,15 @@ public class MainViewController implements Initializable {
             alert.setTitle("No Match Found");
             alert.setHeaderText("Cannot find a product name with: " + term);
             alert.showAndWait();
+        } else if (term.isEmpty()){
+            productTableView.setItems((Inventory.getAllProducts()));
+            productIdTVColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
+            productNameTVColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            productStockTVColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            productPriceTVColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         } else {
             productTableView.setItems(foundProducts);
+
         }
     }
 
